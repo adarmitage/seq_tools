@@ -12,3 +12,7 @@ will take a pair of PE reads and do a fastq trim with the following settings:
 
 farmed out to the cluster
 
+Filter out PhiX with:
+
+~/git_stuff/seq_tools/filter.sh R1.fastq R2.fastq
+which uses bowtie on the high mem node to filter out phix reads 
