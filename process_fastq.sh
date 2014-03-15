@@ -1,9 +1,12 @@
 #!/bin/bash
 SCRIPT_DIR=$(readlink -f ${0%/*})
-FORWARD_READ=$1
-REVERSE_READ=$2
 
-echo $SCRIPT_DIR
-echo "Trimming FastQ files"
-$SCRIPT_DIR/fastq-mcf illumina_full_adapters.fa $FORWARD_READ $REVERSE_READ -o  -o $FORWARD_READ.trim $REVERSE_READ.trim -C 10000000 -u -k 20 -t 0.01 -p 20
+for FWD in $( ls -d ./lane1/LIB2429_NoIndex_L008_R1* ); do
+        #echo $FWD
+	REV=$(sed -e"s/R1/R2/g" <<< $FWD) 
+	#echo $REV
+	echo "Submitting Lane 1 jobs to cluster"
+	qsub $SCRIPT_DIR/submit_process_fastq.sh $SCRIPT_DIR $FWD $REV
+	#$SCRIPT_DIR/submit_process_fastq.sh $FWD $REV
+done 
 
