@@ -29,3 +29,9 @@ cortex_assemble_part1.sh
 cortex_assemble_part2.sh
 #CALLS VARIANTS
 cortex_assemble_part3.sh
+
+
+####aBYSS
+
+~/git_stuff/seq_tools/abyss_assemble_part1.sh ./filtered/filtered.test.1 ./filtered/filtered.test.2 m9_test
+
