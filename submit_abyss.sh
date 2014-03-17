@@ -1,15 +1,18 @@
 #!/bin/bash
 
-#Assemble contigs using velvet and generate summary statistics using process_contigs.pl
+#Assemble contigs using abyss
 #$ -S /bin/bash
 #$ -cwd
-#$ -pe smp 1
 #$ -l virtual_free=94G
 
 NAME=$1
 R1=$2
 R2=$3
+WORK_DIR=$TMPDIR
+DEST =$pwd
 
-abyss-pe np=8 k=45 name=$NAME \
-    in='$R1 R2'
+echo  "Running abyss with the following \n abyss-pe np=16 k=45 name=$NAME in='$R1 $R2' "
 
+cd $TMPDIR
+echo "abyss-pe np=16 k=45 name=$NAME in='$R1 $R2'" |sh
+cp * $DEST/.
