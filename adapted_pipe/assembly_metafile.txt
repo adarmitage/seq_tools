@@ -1,0 +1,33 @@
+#	$path_comp_F		path to compressed forward read:	
+#	$path_comp_R		path to compressed reverse read:
+#
+#	$path_raw_F			path to decompressed forward read:
+#	$path_raw_R			path to decompressed reverse read:
+#
+#	$MP_present			presence of mate pair library:
+#	$MP_revcomp_F		path to decompressed reverse compliment mate-pair forward read:
+#	$MP_revcomp_R		path to decompressed reverse compliment mate-pair reverse read:
+#
+#	$path_ext_reads		path to extended reads:
+# 	$path_remainder_F	path to unextended forwards reads:
+#	$path_remainder_R	path to unextended reverse reads:
+#
+#	$est_size			estimated genome size:
+#	$hash_length		hash length:
+#	$est_cov			estimated coverage:
+
+$path_comp_F =	
+$path_comp_R =
+$path_raw_F	= 
+$path_raw_R = 
+$MP_present	=
+$MP_revcomp_F =
+$MP_revcomp_R =
+$path_ext_reads =
+$path_remainder_F =
+$path_remainder_R =
+$est_size =
+$hash_length =		
+$est_cov =
+
+
