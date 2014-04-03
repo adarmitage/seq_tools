@@ -1,33 +1,30 @@
-#	$path_comp_F		path to compressed forward read:	
-#	$path_comp_R		path to compressed reverse read:
+#	PATH_F_GZ		PATH TO COMPRESSED FORWARD READ
+#	PATH_R_GZ		PATH TO COMPRESSED REVERSE READ
 #
-#	$path_raw_F			path to decompressed forward read:
-#	$path_raw_R			path to decompressed reverse read:
+#	PATH_RAW_F			PATH TO DECOMPRESSED FORWARD READ
+#	PATH_RAW_R			PATH TO DECOMPRESSED REVERSE READ
 #
-#	$MP_present			presence of mate pair library:
-#	$MP_revcomp_F		path to decompressed reverse compliment mate-pair forward read:
-#	$MP_revcomp_R		path to decompressed reverse compliment mate-pair reverse read:
+#	MP_PRESENT			PRESENCE OF MATE PAIR LIBRARY
+#	MP_REVCOMP_F		PATH TO DECOMPRESSED REVERSE COMPLIMENT MATE-PAIR FORWARD READ
+#	MP_REVCOMP_R		PATH TO DECOMPRESSED REVERSE COMPLIMENT MATE-PAIR REVERSE READ
 #
-#	$path_ext_reads		path to extended reads:
-# 	$path_remainder_F	path to unextended forwards reads:
-#	$path_remainder_R	path to unextended reverse reads:
+#	PATH_EXT_READS		PATH TO EXTENDED READS
+# 	PATH_REMAINDER_F	PATH TO UNEXTENDED FORWARDS READS
+#	PATH_REMAINDER_R	PATH TO UNEXTENDED REVERSE READS
 #
-#	$est_size			estimated genome size:
-#	$hash_length		hash length:
-#	$est_cov			estimated coverage:
-
-$path_comp_F =	
-$path_comp_R =
-$path_raw_F	= 
-$path_raw_R = 
-$MP_present	=
-$MP_revcomp_F =
-$MP_revcomp_R =
-$path_ext_reads =
-$path_remainder_F =
-$path_remainder_R =
-$est_size =
-$hash_length =		
-$est_cov =
-
-
+#	EST_SIZE			ESTIMATED GENOME SIZE
+#	HASH_LENGTH		HASH LENGTH
+#	EST_COV			ESTIMATED COVERAGE
+PATH_F_GZ=	sweet
+PATH_R_GZ=	dude
+PATH_RAW_F=
+PATH_RAW_R=
+MP_PRESENT=
+MP_REVCOMP_F=
+MP_REVCOMP_R=
+PATH_EXT_READS=
+PATH_REMAINDER_F=
+PATH_REMAINDER_R=
+EST_SIZE=
+HASH_LENGTH=
+EST_COV=
