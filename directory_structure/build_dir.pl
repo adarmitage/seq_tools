@@ -73,6 +73,7 @@ while ($currentline = <INFILE>) {
 		$linecount++;
 	}
 	else {
+		$currentline =~ s/\r\n//;
 		@currentline = split (',', $currentline);
 		build_dir (@currentline, $project_name, @tier1_dir);
 		$linecount++;
