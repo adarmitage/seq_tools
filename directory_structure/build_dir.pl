@@ -7,8 +7,9 @@ use Cwd;
 my ($usage) = "Usage: build_dir.pl <projectname.csv>\n\nPlease enter a comma delimited file with data in the following format:\n\nnucleic_acid,library_type,species,strain\n";
 
 my($infile) = @ARGV;
-my(@tier1_dir)= ('raw_dna', 'qc_dna', 'raw_rna', 'qc_rna', 'assembly', 'gene_pred', 'analysis', 'annotation');
+my(@tier1_dir)= ('raw_dna', 'qc_dna', 'raw_rna', 'qc_rna', 'assembly', 'gene_pred', 'analysis', 'annotation', 'log');
 my($tier1_dir);
+my($readline);
 my($currentline);
 my(@currentline);
 my($linecount)=-1;
@@ -60,23 +61,42 @@ foreach (@tier1_dir[4 .. 7]) {
 
 
 
-#######  Step 2 #########
+#######  Step 2a ########
+#	Parse .csv file		#
+# 	incase it has been	#
+# 	made using Dos		#
+#########################
+
+# remove ^M from file which in Dos is used to
+# delimit \n. This is represented in unix by a \r
+# This is done by reading in the file and if a \r
+# then splitting the string 
+
+while ( $readline= <INFILE>) {
+	@currentline = split(/^M/, $readline);
+
+
+
+
+#######  Step 2b ########
 #	Read data in from	#
 # 	excel file 		#
 #########################
 
 
-
-while ($currentline = <INFILE>) {
-	print "\nThe current line is:\n$currentline\n";
-	if ($linecount==-1){
-		$linecount++;
-	}
-	else {
-		$currentline =~ s/\r\n//;
-		@currentline = split (',', $currentline);
-		build_dir (@currentline, $project_name, @tier1_dir);
-		$linecount++;
+	foreach (@currentline) {
+		$currentline = $_;
+		$currentline =~ s/\r\n/\n/;
+		print "\nThe current line is:\n$currentline\n";
+		if ($linecount==-1){
+			$linecount++;
+		}
+		else {
+			$currentline =~ s/\r/\n/;
+			@currentline = split (',', $currentline);
+			build_dir (@currentline, $project_name, @tier1_dir);
+			$linecount++;
+		}
 	}
 }
 
