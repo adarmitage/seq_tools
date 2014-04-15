@@ -12,6 +12,5 @@ for F_READ in raw_dna/paired/*/*/F/*;
 		echo "submitting job for:"
 		echo "$F_READ"
 		echo "$R_READ"
-		qsub /home/armita/scripts/assembly_pipe.sh $F_READ $R_READ $GENOME_SZ $INS_LGTH
-	
+		qsub /home/armita/git_repos/seq_tools/initial_pipe/assembly_pipe.sh $F_READ $R_READ $GENOME_SZ $INS_LGTH
 	done
