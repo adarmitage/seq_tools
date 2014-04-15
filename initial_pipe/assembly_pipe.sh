@@ -21,8 +21,9 @@ WORK_DIR=$TMP_DIR
 F_IN=$1
 R_IN=$2
 
+GENOME_SZ=$3
+INS_LGTH=$4
 
-GENOME_SZ=35
 
 ORGANISM=$(echo $F_IN | cut -d "/" -f3 )
 STRAIN=$(echo $F_IN | cut -d "/" -f4 )
@@ -127,7 +128,7 @@ echo "ASSEMBLY_NAME    EXP_COV        HASH_LENGTH	N50	MAX_CONTIG	NO_CONITG	NO_BP
 
 cd $PWD
 for HASH_LENGTH in $( seq 41 10 101 ); do
-        /home/armita/scripts/assemble.sh $HASH_LENGTH $EXTENDED_READ_TRIM $F_REMAINDER_TRIM $R_REMAINDER_TRIM $ASSEMBLY_NAME $COVERAGE $MIN_COV
+        /home/armita/scripts/assemble.sh $HASH_LENGTH $EXTENDED_READ_TRIM $F_REMAINDER_TRIM $R_REMAINDER_TRIM $ASSEMBLY_NAME $COVERAGE $MIN_COV $INS_LGTH
 done
 
 
