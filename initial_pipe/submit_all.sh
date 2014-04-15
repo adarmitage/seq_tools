@@ -4,7 +4,8 @@
 
 for F_READ in raw_dna/paired/*/*/F/*;
 	do  
-		R_READ=${F_READ%F/*}R/*
+		R_PATH=${F_READ%F/*}R/*
+		R_READ=$(echo $R_PATH)
 		echo "submitting job for:"
 		echo "$F_READ"
 		echo "$R_READ"
