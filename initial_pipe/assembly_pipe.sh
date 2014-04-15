@@ -21,6 +21,9 @@ WORK_DIR=$TMP_DIR
 F_IN=$1
 R_IN=$2
 
+
+GENOME_SZ=35
+
 ORGANISM=$(echo $F_IN | cut -d "/" -f3 )
 STRAIN=$(echo $F_IN | cut -d "/" -f4 )
 
@@ -95,7 +98,7 @@ fastq-mcf $ILLUMINA_ADAPTERS $F_REMAINDER $R_REMAINDER -o $F_REMAINDER_TRIM -o $
 
 EST_COV_EXT=$(count_nucl.pl -i $EXTENDED_READ_TRIM -g 65 | tail -n1 | cut -d ' ' -f10)
 
-EST_COV_REMAINDER=$(count_nucl.pl -i $F_REMAINDER_TRIM -i $R_REMAINDER_TRIM -g 65 | tail -n1 | cut -d ' ' -f10)
+EST_COV_REMAINDER=$(count_nucl.pl -i $F_REMAINDER_TRIM -i $R_REMAINDER_TRIM -g $GENOME_SZ | tail -n1 | cut -d ' ' -f10)
 
 COVERAGE=$(perl -e '$sum=$ARGV[0]+$ARGV[1]; print "$sum\n";exit;' $EST_COV_EXT $EST_COV_REMAINDER)
 MIN_COV=$(perl -e '$sum=$ARGV[0]/3; print "$sum\n";exit;' $COVERAGE)
