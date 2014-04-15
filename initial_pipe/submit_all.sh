@@ -9,6 +9,6 @@ for F_READ in raw_dna/paired/*/*/F/*;
 		echo "submitting job for:"
 		echo "$F_READ"
 		echo "$R_READ"
-#		qsub /home/armita/scripts/assembly_pipe.sh $F_READ $R_READ
+		qsub /home/armita/scripts/assembly_pipe.sh $F_READ $R_READ
 	
 	done
