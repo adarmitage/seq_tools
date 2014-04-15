@@ -14,11 +14,18 @@
 # Initialise values	#
 #########################
 
+
+PATH=$PWD
+WORK_DIR=$TMP_DIR
+
 F_IN=$1
 R_IN=$2
 
-F_READ_ZIP=$(echo $F_IN | sed 's/.fastq.gz/.copy.fastq.gz/')
-R_READ_ZIP=$(echo $R_IN | sed 's/.fastq.gz/.copy.fastq.gz/')
+ORGANISM=$(echo $F_IN | cut -d "/" -f3 )
+STRAIN=$(echo $F_IN | cut -d "/" -f4 )
+
+F_READ_ZIP=$(cut $F_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
+R_READ_ZIP=$(cut $R_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
 
 F_READ=$(echo $F_READ_ZIP | sed 's/.gz//')
 R_READ=$(echo $R_READ_ZIP | sed 's/.gz//')
@@ -57,9 +64,10 @@ echo "your trimmed reverse reads will be stored in the file $R_REMAINDER_TRIM"
 # 	unzip reads			#
 #########################
 
+cd $WORK_DIR
 
-cp $F_IN $F_READ_ZIP
-cp $R_IN $R_READ_ZIP
+cp $PATH/$F_IN $F_READ_ZIP
+cp $PATH/$R_IN $R_READ_ZIP
 
 gunzip $F_READ_ZIP
 gunzip $R_READ_ZIP
@@ -125,3 +133,7 @@ done
 #########################
 
 gzip *.fastq
+
+cp -r ../$TMP_DIR/. $PATH/assembly/velvet/$ORGANISM/$STRAIN/.
+
+rm -r ../$TMP_DIR/
