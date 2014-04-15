@@ -15,8 +15,8 @@
 #########################
 
 
-PATH=$PWD
-WORK_DIR=$TMP_DIR
+CUR_PATH=$PWD
+CUR_WORK_DIR=$TMP_DIR
 
 F_IN=$1
 R_IN=$2
@@ -25,8 +25,8 @@ GENOME_SZ=$3
 INS_LGTH=$4
 
 
-ORGANISM=$(echo $F_IN | cut -d "/" -f3 )
-STRAIN=$(echo $F_IN | cut -d "/" -f4 )
+ORGANISM=$(echo $F_IN | cut -d "/" -f3)
+STRAIN=$(echo $F_IN | cut -d "/" -f4)
 
 F_READ_ZIP=$(cut $F_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
 R_READ_ZIP=$(cut $R_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
@@ -138,6 +138,6 @@ done
 
 gzip *.fastq
 
-cp -r ../$TMP_DIR/. $PATH/assembly/velvet/$ORGANISM/$STRAIN/.
+cp -r ../$CUR_TMP_DIR/. $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
 
-rm -r ../$TMP_DIR/
+rm -r ../$CUR_TMP_DIR/
