@@ -44,7 +44,7 @@ EXTENDED_READ_TRIM="$ASSEMBLY_NAME""_ext_trim.fastq"
 F_REMAINDER_TRIM="$ASSEMBLY_NAME""_F_trim.fastq"
 R_REMAINDER_TRIM="$ASSEMBLY_NAME""_R_trim.fastq"
 
-ILLUMINA_ADAPTERS=/home/armita/idris/scripts/illumina_full_adapters.fa
+ILLUMINA_ADAPTERS=/home/armita/git_repos/seq_tools/illumina_full_adapters.fa
 
 echo "your compressed forward read is: $F_IN"
 echo "your compressed reverse read is: $R_IN"
