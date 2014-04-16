@@ -16,7 +16,7 @@
 
 
 CUR_PATH=$PWD
-CUR_WORK_DIR=$TMPDIR
+WORK_DIR=/tmp/assembly_pipe
 
 F_IN=$1
 R_IN=$2
@@ -68,6 +68,7 @@ echo "your trimmed reverse reads will be stored in the file $R_REMAINDER_TRIM"
 # 	unzip reads			#
 #########################
 
+mkdir $WORK_DIR
 cd $WORK_DIR
 
 cp $PATH/$F_IN $F_READ_ZIP
@@ -138,6 +139,6 @@ done
 
 gzip *.fastq
 
-cp -r ../$CUR_WORK_DIR/. $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
+cp -r $WORK_DIR/. $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
 
-rm -r ../$CUR_WORK_DIR/
+rm -r $WORK_DIR/
