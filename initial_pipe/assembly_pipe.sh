@@ -16,7 +16,7 @@
 
 
 CUR_PATH=$PWD
-CUR_WORK_DIR=$TMP_DIR
+CUR_WORK_DIR=$TMPDIR
 
 F_IN=$1
 R_IN=$2
@@ -138,6 +138,6 @@ done
 
 gzip *.fastq
 
-cp -r ../$CUR_TMP_DIR/. $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
+cp -r ../$CUR_WORK_DIR/. $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
 
-rm -r ../$CUR_TMP_DIR/
+rm -r ../$CUR_WORK_DIR/
