@@ -5,14 +5,27 @@ GENOME_SZ=35
 INS_LGTH=700
 
 
-for F_READ in raw_dna/paired/*/*/F/*;
-	do  
-		R_PATH=${F_READ%F/*}R/*
-		R_READ=$(echo $R_PATH)
-		echo "submitting job for:"
-		echo "$F_READ"
-		echo "$R_READ"
+for F_READ in raw_dna/paired/*/*/F/*; do 
+	
+	R_PATH=${F_READ%F/*}R/*
+	R_READ=$(echo $R_PATH)	
 
-		qsub /home/armita/git_repos/seq_tools/initial_pipe/assembly_pipe.sh $F_READ $R_READ $GENOME_SZ $INS_LGTH
+	echo "submitting job for:"
+	echo "$F_READ"
+	echo "$R_READ"
+	
+	cp $F_READ $F_READ.2.gz
+	cp $R_READ $R_READ.2.gz
 
-	done
+	gunzip $F_READ.2.gz
+	gunzip $F_READ.2.gz 
+	
+	F_INFILE=$(echo $F_READ.2 | sed 's/.gz.2//')
+	R_INFILE=$(echo $R_READ.2 | sed 's/.gz.2//')
+	
+	mv $F_READ.2 $F_INFILE
+	mv $R_READ.2 $R_INFILE
+	
+	qsub /home/armita/git_repos/seq_tools/initial_pipe/assembly_pipe.sh $F_INFILE $R_INFILE $GENOME_SZ $INS_LGTH
+
+done
