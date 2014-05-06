@@ -71,8 +71,8 @@ echo "your trimmed reverse reads will be stored in the file $R_REMAINDER_TRIM"
 mkdir $WORK_DIR
 cd $WORK_DIR
 
-cp $PATH/$F_IN $F_READ_ZIP
-cp $PATH/$R_IN $R_READ_ZIP
+cp $CUR_PATH/$F_IN $F_READ_ZIP
+cp $CUR_PATH/$R_IN $R_READ_ZIP
 
 gunzip $F_READ_ZIP
 gunzip $R_READ_ZIP
