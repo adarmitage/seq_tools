@@ -7,8 +7,9 @@ INS_LGTH=700
 
 for F_READ in raw_dna/paired/*/*/F/*; do 
 	
-	R_PATH=${F_READ%F/*}R/*
-	R_READ=$(echo $R_PATH)	
+#	R_PATH=${F_READ%F/*}R/*
+	R_PATH=$(echo $F_READ | sed 's%F*%R%')
+	R_READ=$(ls $R_PATH/*)	
 
 	echo "submitting job for:"
 	echo "$F_READ"
@@ -18,10 +19,10 @@ for F_READ in raw_dna/paired/*/*/F/*; do
 	cp $R_READ $R_READ.2.gz
 
 	gunzip $F_READ.2.gz
-	gunzip $F_READ.2.gz 
+	gunzip $R_READ.2.gz 
 	
-	F_INFILE=$(echo $F_READ.2 | sed 's/.gz.2//')
-	R_INFILE=$(echo $R_READ.2 | sed 's/.gz.2//')
+	F_INFILE=$(echo $F_READ.2 | sed 's%.gz.2%%')
+	R_INFILE=$(echo $R_READ.2 | sed 's%.gz.2%%')
 	
 	mv $F_READ.2 $F_INFILE
 	mv $R_READ.2 $R_INFILE
