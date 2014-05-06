@@ -11,7 +11,7 @@ for F_READ in raw_dna/paired/*/*/F/*; do
 	echo "$F_READ"
 	
 #	R_PATH=${F_READ%F/*}R/*
-	R_TMP=$(echo $F_READ | sed "s/F/R/p")
+	R_TMP=$(echo $F_READ | sed 's/F/R/g')
 	R_READ=$(ls -r $R_TMP)	
 
 
