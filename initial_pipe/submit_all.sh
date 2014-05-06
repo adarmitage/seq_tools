@@ -11,7 +11,7 @@ for F_READ in raw_dna/paired/*/*/F/*; do
 	echo "$F_READ"
 	
 #	R_PATH=${F_READ%F/*}R/*
-	R_TMP=$(echo $F_READ | sed "s%F*%R%")
+	R_TMP=$(echo $F_READ | sed "s/F*/R/")
 	R_READ=$(ls $R_TMP/*)	
 
 
@@ -23,8 +23,8 @@ for F_READ in raw_dna/paired/*/*/F/*; do
 	gunzip $F_READ.2.gz
 	gunzip $R_READ.2.gz 
 	
-	F_INFILE=$(echo $F_READ.2 | sed 's%.gz.2%%')
-	R_INFILE=$(echo $R_READ.2 | sed 's%.gz.2%%')
+	F_INFILE=$(echo $F_READ.2 | sed 's/.gz.2//')
+	R_INFILE=$(echo $R_READ.2 | sed 's/.gz.2//')
 	
 	mv $F_READ.2 $F_INFILE
 	mv $R_READ.2 $R_INFILE
