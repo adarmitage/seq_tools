@@ -6,13 +6,15 @@ INS_LGTH=700
 
 
 for F_READ in raw_dna/paired/*/*/F/*; do 
+
+	echo "submitting job for:"
+	echo "$F_READ"
 	
 #	R_PATH=${F_READ%F/*}R/*
 	R_TMP=$(echo $F_READ | sed 's%F*%R%')
 	R_READ=$(ls $R_TMP/*)	
 
-	echo "submitting job for:"
-	echo "$F_READ"
+
 	echo "$R_READ"
 	
 	cp $F_READ $F_READ.2.gz
