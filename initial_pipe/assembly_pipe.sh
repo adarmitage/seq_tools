@@ -8,7 +8,7 @@
 
 # Script to prepare data for genome assembly including
 #  flash-extending reads, trimming and estimating coverage
-# Usage: seq_prep.sh <F_read.fastq.gz> <R_read.fastq.gz>
+# Usage: seq_prep.sh <F_FILE.fastq.gz> <R_FILE.fastq.gz>
 
 #######  Step 1	 ########
 # Initialise values	#
@@ -28,16 +28,16 @@ INS_LGTH=$4
 ORGANISM=$(echo $F_IN | cut -d "/" -f3)
 STRAIN=$(echo $F_IN | cut -d "/" -f4)
 
-#F_READ_ZIP=$(cut $F_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
-#R_READ_ZIP=$(cut $R_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
+#F_FILE_ZIP=$(cut $F_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
+#R_FILE_ZIP=$(cut $R_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
 
-#F_READ=$(echo $F_READ_ZIP | sed 's/.gz//')
-#R_READ=$(echo $R_READ_ZIP | sed 's/.gz//')
+#F_FILE=$(echo $F_FILE_ZIP | sed 's/.gz//')
+#R_FILE=$(echo $R_FILE_ZIP | sed 's/.gz//')
 
-F_READ=$(echo $F_IN | cut -d "/" -f6)
-R_READ=$(echo $R_IN | cut -d "/" -f6)
+F_FILE=$(echo $F_IN | cut -d "/" -f6)
+R_FILE=$(echo $R_IN | cut -d "/" -f6)
 
-ASSEMBLY_NAME=$(echo $F_READ | sed 's/_F.copy.fastq//')
+ASSEMBLY_NAME=$(echo $F_FILE | sed 's/_F.copy.fastq//')
 
 EXTENDED_READ=$ASSEMBLY_NAME.extendedFrags.fastq
 F_REMAINDER=$ASSEMBLY_NAME.notCombined_1.fastq
@@ -52,8 +52,8 @@ ILLUMINA_ADAPTERS=/home/armita/git_repos/seq_tools/illumina_full_adapters.fa
 echo "your compressed forward read is: $F_IN"
 echo "your compressed reverse read is: $R_IN"
 	echo ""
-echo "your forward read is: $F_READ"
-echo "your reverse read is: $R_READ"
+echo "your forward read is: $F_FILE"
+echo "your reverse read is: $R_FILE"
 	echo ""
 echo "your Flash outfiles will be given the prefix: $ASSEMBLY_NAME"
 echo "the extended reads will be named: $EXTENDED_READ"
@@ -74,18 +74,18 @@ echo "your trimmed reverse reads will be stored in the file $R_REMAINDER_TRIM"
 mkdir $WORK_DIR
 cd $WORK_DIR
 
-#cp $CUR_PATH/$F_IN $F_READ_ZIP
-#cp $CUR_PATH/$R_IN $R_READ_ZIP
+#cp $CUR_PATH/$F_IN $F_FILE_ZIP
+#cp $CUR_PATH/$R_IN $R_FILE_ZIP
 
-#gunzip $F_READ_ZIP
-#gunzip $R_READ_ZIP
+#gunzip $F_FILE_ZIP
+#gunzip $R_FILE_ZIP
 
 
 #######  Step 3	 ########
 # 	Flash reads			#
 #########################
 
-flash $F_READ $R_READ -o $ASSEMBLY_NAME
+flash $F_FILE $R_FILE -o $ASSEMBLY_NAME
 
 
 #######  Step 4	 ########
@@ -118,8 +118,8 @@ echo "the estimated combined coverage is: $COVERAGE"
 # 	Cleanup		#
 #########################
 
-#rm $F_READ
-#rm $R_READ
+#rm $F_FILE
+#rm $R_FILE
 
 rm $F_IN
 rm $R_IN
