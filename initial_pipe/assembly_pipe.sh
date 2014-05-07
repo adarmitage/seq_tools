@@ -86,7 +86,7 @@ cd $WORK_DIR
 # 	Flash reads			#
 #########################
 
-flash $F_FILE $R_FILE -o $ASSEMBLY_NAME
+/home/idris/prog/FLASH-1.2.6/flash $F_FILE $R_FILE -o $ASSEMBLY_NAME
 
 
 #######  Step 4	 ########
