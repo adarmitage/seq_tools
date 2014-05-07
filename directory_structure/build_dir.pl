@@ -128,9 +128,6 @@ sub build_dir {
 		mkdir "$project_name/$tier1_dir/prog1";
 		mkdir "$project_name/$tier1_dir/prog1/$species";
 		mkdir "$project_name/$tier1_dir/prog1/$species/$strain";
-		foreach ('F', 'R'){
-			mkdir "$project_name/$tier1_dir/prog1/$species/$strain/$_";
-			print "Created directory: $project_name/$tier1_dir/prog1/$species/$strain/$_\n";
-			}
+		print "Created directory: $project_name/$tier1_dir/$library_type/$species/$strain\n";
 		}	
 }
