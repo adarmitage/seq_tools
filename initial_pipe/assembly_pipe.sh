@@ -18,8 +18,8 @@
 CUR_PATH=$PWD
 WORK_DIR=/tmp/assembly_pipe
 
-F_IN=$($CUR_PATH/$1)
-R_IN=$($CUR_PATH/$2)
+F_IN=$CUR_PATH/$1
+R_IN=$CUR_PATH/$2
 
 GENOME_SZ=$3
 INS_LGTH=$4
