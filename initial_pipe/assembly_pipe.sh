@@ -134,9 +134,9 @@ rm $ASSEMBLY_NAME.*
 
 echo "ASSEMBLY_NAME    EXP_COV        HASH_LENGTH	N50	MAX_CONTIG	NO_CONITG	NO_BP" > "$ASSEMBLY_NAME"_stats.txt
 
-cd $PWD
+#cd PWD
 for HASH_LENGTH in $( seq 41 10 101 ); do
-        /home/armita/scripts/assemble.sh $HASH_LENGTH $EXTENDED_READ_TRIM $F_REMAINDER_TRIM $R_REMAINDER_TRIM $ASSEMBLY_NAME $COVERAGE $MIN_COV $INS_LGTH;
+        /home/armita/git_repos/seq_tools/initial_pipe/assemble.sh $HASH_LENGTH $EXTENDED_READ_TRIM $F_REMAINDER_TRIM $R_REMAINDER_TRIM $ASSEMBLY_NAME $COVERAGE $MIN_COV $INS_LGTH;
 done
 
 
