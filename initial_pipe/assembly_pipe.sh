@@ -37,7 +37,8 @@ STRAIN=$(echo $F_IN | cut -d "/" -f4)
 F_FILE=$(echo $F_IN | cut -d "/" -f6)
 R_FILE=$(echo $R_IN | cut -d "/" -f6)
 
-ASSEMBLY_NAME=$(echo $F_FILE | sed 's/_F.copy.fastq//')
+#ASSEMBLY_NAME=$(echo $F_FILE | sed 's/_F.copy.fastq//')
+ASSEMBLY_NAME=$(echo "$STRAIN"_assembly)
 
 EXTENDED_READ=$ASSEMBLY_NAME.extendedFrags.fastq
 F_REMAINDER=$ASSEMBLY_NAME.notCombined_1.fastq
