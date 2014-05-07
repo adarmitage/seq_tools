@@ -18,15 +18,15 @@
 CUR_PATH=$PWD
 WORK_DIR=/tmp/assembly_pipe
 
-F_IN=$1
-R_IN=$2
+F_IN=$($CUR_PATH/$1)
+R_IN=$($CUR_PATH/$2)
 
 GENOME_SZ=$3
 INS_LGTH=$4
 
 
-ORGANISM=$(echo $F_IN | cut -d "/" -f3)
-STRAIN=$(echo $F_IN | cut -d "/" -f4)
+ORGANISM=$(echo $F_IN | rev | cut -d "/" -f4 | rev)
+STRAIN=$(echo $F_IN | rev | cut -d "/" -f3 | rev)
 
 #F_FILE_ZIP=$(cut $F_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
 #R_FILE_ZIP=$(cut $R_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
@@ -34,8 +34,8 @@ STRAIN=$(echo $F_IN | cut -d "/" -f4)
 #F_FILE=$(echo $F_FILE_ZIP | sed 's/.gz//')
 #R_FILE=$(echo $R_FILE_ZIP | sed 's/.gz//')
 
-F_FILE=$(echo $F_IN | cut -d "/" -f6)
-R_FILE=$(echo $R_IN | cut -d "/" -f6)
+F_FILE=$(echo $F_IN | rev | cut -d "/" -f1 | rev)
+R_FILE=$(echo $R_IN | rev | cut -d "/" -f1 | rev)
 
 #ASSEMBLY_NAME=$(echo $F_FILE | sed 's/_F.copy.fastq//')
 ASSEMBLY_NAME=$(echo "$STRAIN"_assembly)
@@ -86,7 +86,7 @@ cd $WORK_DIR
 # 	Flash reads			#
 #########################
 
-/home/idris/prog/FLASH-1.2.6/flash $F_FILE $R_FILE -o $ASSEMBLY_NAME
+/home/idris/prog/FLASH-1.2.6/flash $F_IN $R_IN -o $ASSEMBLY_NAME
 
 
 #######  Step 4	 ########
