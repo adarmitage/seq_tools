@@ -12,7 +12,7 @@ for F_READ in raw_dna/paired/*/*/F/*; do
 	
 #	R_PATH=${F_READ%F/*}R/*
 	R_TMP=$(echo $F_READ | sed 's/F.*//')
-	R_READ=$(ls $R_TMP/R/*)	
+	R_READ=$(ls "$R_TMP"R/* | cat)	
 
 
 	echo "$R_READ"
