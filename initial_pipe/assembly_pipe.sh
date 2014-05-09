@@ -17,6 +17,7 @@
 
 CUR_PATH=$PWD
 WORK_DIR=/tmp/assembly_pipe
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 F_IN=$CUR_PATH/$1
 R_IN=$CUR_PATH/$2
@@ -41,7 +42,8 @@ EXTENDED_READ_TRIM="$ASSEMBLY_NAME""_ext_trim.fastq"
 F_REMAINDER_TRIM="$ASSEMBLY_NAME""_F_trim.fastq"
 R_REMAINDER_TRIM="$ASSEMBLY_NAME""_R_trim.fastq"
 
-ILLUMINA_ADAPTERS=/home/armita/git_repos/seq_tools/illumina_full_adapters.fa
+#ILLUMINA_ADAPTERS=/home/armita/git_repos/seq_tools/illumina_full_adapters.fa
+ILLUMINA_ADAPTERS=$SCRIPT_DIR/../illumina_full_adapters.fa
 
 echo "your compressed forward read is: $F_IN"
 echo "your compressed reverse read is: $R_IN"
@@ -72,8 +74,14 @@ cd $WORK_DIR
 #######  Step 3	 ########
 # 	Flash reads			#
 #########################
+# Note that Flash is currently not installed on the EMR clusters master profile
+# It is currently installed on the idris profile and you can add  
+# PATH=${PATH}:/home/idris/prog/FLASH-1.2.6/
+# to your $HOME/.profile to make it executable. You may have to reload your edited
+# .profile file after this by running
+# source $HOME/.profile
 
-/home/idris/prog/FLASH-1.2.6/flash $F_IN $R_IN -o $ASSEMBLY_NAME
+flash $F_IN $R_IN -o $ASSEMBLY_NAME
 
 #######  Step 4	 ########
 # 	Quality trim		#
@@ -120,11 +128,11 @@ rm $ASSEMBLY_NAME.*
 echo "ASSEMBLY_NAME    EXP_COV        HASH_LENGTH	N50	MAX_CONTIG	NO_CONITG	NO_BP" > "$ASSEMBLY_NAME"_stats.txt
 
 for HASH_LENGTH in $( seq 41 10 101 ); do
-        /home/armita/git_repos/seq_tools/initial_pipe/assemble.sh $HASH_LENGTH $EXTENDED_READ_TRIM $F_REMAINDER_TRIM $R_REMAINDER_TRIM $ASSEMBLY_NAME $COVERAGE $MIN_COV $INS_LGTH;
+        $SCRIPT_DIR/assemble.sh $HASH_LENGTH $EXTENDED_READ_TRIM $F_REMAINDER_TRIM $R_REMAINDER_TRIM $ASSEMBLY_NAME $COVERAGE $MIN_COV $INS_LGTH;
 done
 
 cp -r "$WORK_DIR/$ASSEMBLY_NAME.*" $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
-cp -r "$WORK_DIR/$ASSEMBLYNAME""_stats.txt" $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
+cp -r "$WORK_DIR/$ASSEMBLY_NAME""_stats.txt" $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
 
 
 #######  Step 8  ########
