@@ -28,16 +28,9 @@ INS_LGTH=$4
 ORGANISM=$(echo $F_IN | rev | cut -d "/" -f4 | rev)
 STRAIN=$(echo $F_IN | rev | cut -d "/" -f3 | rev)
 
-#F_FILE_ZIP=$(cut $F_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
-#R_FILE_ZIP=$(cut $R_IN -d "/" -f6 | sed 's/.fastq.gz/.copy.fastq.gz/')
-
-#F_FILE=$(echo $F_FILE_ZIP | sed 's/.gz//')
-#R_FILE=$(echo $R_FILE_ZIP | sed 's/.gz//')
-
 F_FILE=$(echo $F_IN | rev | cut -d "/" -f1 | rev)
 R_FILE=$(echo $R_IN | rev | cut -d "/" -f1 | rev)
 
-#ASSEMBLY_NAME=$(echo $F_FILE | sed 's/_F.copy.fastq//')
 ASSEMBLY_NAME=$(echo "$STRAIN"_assembly)
 
 EXTENDED_READ=$ASSEMBLY_NAME.extendedFrags.fastq
@@ -74,12 +67,6 @@ echo "your trimmed reverse reads will be stored in the file $R_REMAINDER_TRIM"
 
 mkdir $WORK_DIR
 cd $WORK_DIR
-
-#cp $CUR_PATH/$F_IN $F_FILE_ZIP
-#cp $CUR_PATH/$R_IN $R_FILE_ZIP
-
-#gunzip $F_FILE_ZIP
-#gunzip $R_FILE_ZIP
 
 
 #######  Step 3	 ########
@@ -120,9 +107,6 @@ echo "the estimated combined coverage is: $COVERAGE"
 # 	Cleanup		#
 #########################
 
-#rm $F_FILE
-#rm $R_FILE
-
 rm $F_IN
 rm $R_IN
 
@@ -135,7 +119,6 @@ rm $ASSEMBLY_NAME.*
 
 echo "ASSEMBLY_NAME    EXP_COV        HASH_LENGTH	N50	MAX_CONTIG	NO_CONITG	NO_BP" > "$ASSEMBLY_NAME"_stats.txt
 
-#cd PWD
 for HASH_LENGTH in $( seq 41 10 101 ); do
         /home/armita/git_repos/seq_tools/initial_pipe/assemble.sh $HASH_LENGTH $EXTENDED_READ_TRIM $F_REMAINDER_TRIM $R_REMAINDER_TRIM $ASSEMBLY_NAME $COVERAGE $MIN_COV $INS_LGTH;
 done
@@ -147,10 +130,5 @@ cp -r "$WORK_DIR/$ASSEMBLYNAME""_stats.txt" $CUR_PATH/assembly/velvet/$ORGANISM/
 #######  Step 8  ########
 #       Cleanup         #
 #########################
-
-
-#gzip *.fastq
-
-
 
 rm -r $WORK_DIR/
