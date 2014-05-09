@@ -88,7 +88,6 @@ cd $WORK_DIR
 
 /home/idris/prog/FLASH-1.2.6/flash $F_IN $R_IN -o $ASSEMBLY_NAME
 
-
 #######  Step 4	 ########
 # 	Quality trim		#
 #########################
@@ -96,6 +95,8 @@ cd $WORK_DIR
 fastq-mcf $ILLUMINA_ADAPTERS $EXTENDED_READ -o $EXTENDED_READ_TRIM -C 1000000 -u -k 20 -t 0.01 -q 30 -p 5
 
 fastq-mcf $ILLUMINA_ADAPTERS $F_REMAINDER $R_REMAINDER -o $F_REMAINDER_TRIM -o $R_REMAINDER_TRIM -C 1000000 -u -k 20 -t 0.01 -q 30 -p 5
+
+cp -r "$WORK_DIR/$ASSEMBLY_NAME""_*" $CUR_PATH/qc_dna/paired/$ORGANISM/$STRAIN/.
 
 
 #######  Step 5	 ########
@@ -139,6 +140,9 @@ for HASH_LENGTH in $( seq 41 10 101 ); do
         /home/armita/git_repos/seq_tools/initial_pipe/assemble.sh $HASH_LENGTH $EXTENDED_READ_TRIM $F_REMAINDER_TRIM $R_REMAINDER_TRIM $ASSEMBLY_NAME $COVERAGE $MIN_COV $INS_LGTH;
 done
 
+cp -r "$WORK_DIR/$ASSEMBLY_NAME.*" $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
+cp -r "$WORK_DIR/$ASSEMBLYNAME""_stats.txt" $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
+
 
 #######  Step 8  ########
 #       Cleanup         #
@@ -147,6 +151,6 @@ done
 
 #gzip *.fastq
 
-cp -r $WORK_DIR/. $CUR_PATH/assembly/velvet/$ORGANISM/$STRAIN/.
+
 
 rm -r $WORK_DIR/
