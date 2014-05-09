@@ -9,7 +9,8 @@ F_READ=$1
 R_READ=$2
 GENOME_SZ=$(if [$3] ; then; echo "$3"; else ; echo "35" ; fi)
 INS_LGTH=$(if [$4] ; then; echo "$4"; else ; echo "700" ; fi)
-	
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"	
 
 echo "submitting job for:"
 echo "$F_READ"
@@ -27,6 +28,6 @@ R_INFILE=$(echo $R_READ.2 | sed 's/.gz.2//')
 mv $F_READ.2 $F_INFILE
 mv $R_READ.2 $R_INFILE
 	
-qsub /home/armita/git_repos/seq_tools/initial_pipe/assembly_pipe.sh $F_INFILE $R_INFILE $GENOME_SZ $INS_LGTH
+qsub $SCRIPT_DIR/assembly_pipe.sh $F_INFILE $R_INFILE $GENOME_SZ $INS_LGTH
 
 
