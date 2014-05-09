@@ -15,6 +15,10 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo "submitting job for:"
 echo "$F_READ"
 echo "$R_READ"
+echo "The estimated genome size you supplied is:"
+echo "$GENOME_SZ"
+echo "The insert length of your paired reads is:"
+echo "$INS_LGTH"
 	
 cp $F_READ $F_READ.2.gz
 cp $R_READ $R_READ.2.gz
@@ -28,6 +32,6 @@ R_INFILE=$(echo $R_READ.2 | sed 's/.gz.2//')
 mv $F_READ.2 $F_INFILE
 mv $R_READ.2 $R_INFILE
 	
-qsub $SCRIPT_DIR/assembly_pipe.sh $F_INFILE $R_INFILE $GENOME_SZ $INS_LGTH
+qsub $SCRIPT_DIR/assembly_pipe.sh $F_INFILE $R_INFILE $GENOME_SZ $INS_LGTH $SCRIPT_DIR
 
 

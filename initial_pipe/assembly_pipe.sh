@@ -17,7 +17,7 @@
 
 CUR_PATH=$PWD
 WORK_DIR=/tmp/assembly_pipe
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR=$5
 
 F_IN=$CUR_PATH/$1
 R_IN=$CUR_PATH/$2
