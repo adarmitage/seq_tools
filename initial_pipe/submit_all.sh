@@ -4,8 +4,8 @@
 # Will collect Genome size and insert length value from the command line
 # if no values are given then default values are used.
 
-GENOME_SZ=$(if [$1] ; then; echo "$1"; else ; echo "35" ; fi)
-INS_LGTH=$(if [$2] ; then; echo "$2"; else ; echo "700" ; fi)
+if [$1] ; then GENOME_SZ=$1 ; else ; GENOME_SZ=35 ; fi
+if [$2] ; then INS_LGTH=$2 ; else ; INS_LGTH=700 ; fi
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"	
 

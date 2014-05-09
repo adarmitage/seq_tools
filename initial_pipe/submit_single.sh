@@ -7,8 +7,8 @@
 
 F_READ=$1
 R_READ=$2
-GENOME_SZ=$(if [$3] ; then; echo "$3"; else ; echo "35" ; fi)
-INS_LGTH=$(if [$4] ; then; echo "$4"; else ; echo "700" ; fi)
+if [$3] ; then GENOME_SZ=$3 ; else ; GENOME_SZ=35 ; fi
+if [$4] ; then INS_LGTH=$4 ; else ; INS_LGTH=700 ; fi
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"	
 
